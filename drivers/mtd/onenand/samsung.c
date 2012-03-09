@@ -46,8 +46,11 @@ enum soc_type {
 #include "samsung_gsm.h"
 #elif defined(CONFIG_SAMSUNG_FASCINATE)
 #include "samsung_fascinate.h"
+#elif defined(CONFIG_SAMSUNG_P1) || defined(CONFIG_SAMSUNG_P1L) || defined(CONFIG_SAMSUNG_P1N)
+#include "samsung_p1.h"
+#elif defined(CONFIG_SAMSUNG_P1C)
+#include "samsung_p1c.h"
 #else
-#error Should not be used on aries devices (can brick!).
 #include "samsung.h"
 #endif
 

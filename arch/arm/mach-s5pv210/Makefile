@@ -13,12 +13,12 @@ obj-				:=
 # Core support for S5PV210 system
 
 obj-$(CONFIG_CPU_S5PV210)	+= cpu.o init.o clock.o dma.o
-obj-$(CONFIG_CPU_S5PV210)	+= setup-i2c0.o
+obj-$(CONFIG_CPU_S5PV210)	+= setup-i2c0.o setup-i2c1.o setup-i2c2.o
 obj-$(CONFIG_S5PV210_PM)	+= pm.o sleep.o
 obj-$(CONFIG_CPU_FREQ)		+= cpufreq.o
 
 obj-$(CONFIG_S5PV210_POWER_DOMAIN)	+= power-domain.o
-obj-$(CONFIG_S5PV210_CORESIGHT) += coresight.o
+obj-$(CONFIG_S5PV210_CORESIGHT)		+= coresight.o
 
 # machine support
 
@@ -47,6 +47,12 @@ obj-$(CONFIG_PHONE_ARIES_CDMA)	+= dev-s1-phone.o
 obj-$(CONFIG_PHONE_ARIES_CDMA)	+= level.o
 obj-$(CONFIG_PHONE_CRESPO)	+= dev-aries-phone.o
 
+obj-$(CONFIG_MACH_P1)		+= mach-p1.o p1-rfkill.o sec_switch.o
+#obj-$(CONFIG_MACH_P1)		+= herring-btlpm.o
+obj-$(CONFIG_MACH_P1)		+= herring-watchdog.o
+obj-$(CONFIG_MACH_P1)		+= herring-panel.o
+obj-$(CONFIG_PHONE_P1_GSM)	+= dev-p1-phone.o
+
 # device support
 
 obj-y				+= dev-audio.o
@@ -67,6 +73,9 @@ obj-$(CONFIG_S5PV210_SETUP_SDHCI_GPIO)	+= setup-sdhci-gpio.o
 obj-$(CONFIG_S5PV210_SETUP_FIMC0)	+= setup-fimc0.o
 obj-$(CONFIG_S5PV210_SETUP_FIMC1)	+= setup-fimc1.o
 obj-$(CONFIG_S5PV210_SETUP_FIMC2)	+= setup-fimc2.o
+obj-$(CONFIG_S5PV210_SETUP_CSIS)	+= setup-csis.o
 
 obj-$(CONFIG_CPU_IDLE)		+= cpuidle.o
 obj-$(CONFIG_CPU_FREQ)		+= dev-cpufreq.o
+
+obj-$(CONFIG_SEC_HEADSET)	+= sec_jack.o
