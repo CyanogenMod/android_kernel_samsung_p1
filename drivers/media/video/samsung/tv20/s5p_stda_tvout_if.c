@@ -3,7 +3,7 @@
  * TVOut interface ftn. file for Samsung TVOut driver
  *
  * Copyright (c) 2010 Samsung Electronics
- * http://www.samsungsemi.com/
+ * 	http://www.samsungsemi.com/
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -179,7 +179,7 @@ bool _s5p_tv_if_init_param(void)
 	st->hdmi_spd_info_frame.spd_header = NULL;
 	st->hdmi_spd_info_frame.spd_data = NULL;
 
-	st->hdcp_en = false;
+	st->hdcp_en = true;
 	st->hdmi_audio_type = HDMI_AUDIO_PCM;
 
 	st->tvout_param_available = true;
@@ -360,7 +360,7 @@ bool _s5p_tv_if_init_sd_reg(void)
 	bool br_hue_sat_adj = st->sdout_bri_hue_set.bright_hue_sat_adj;
 	bool wss_cvbs = st->sdout_vbi.wss_cvbs;
 	bool wss_y_svideo = st->sdout_vbi.wss_y_svideo;
-	bool cgmsa_rgb	= st->sdout_vbi.cgmsa_rgb;
+	bool cgmsa_rgb 	 = st->sdout_vbi.cgmsa_rgb;
 	bool wss_rgb = st->sdout_vbi.wss_rgb;
 	bool cgmsa_y = st->sdout_vbi.cgmsa_y_pb_pr;
 	bool wss_y = st->sdout_vbi.wss_y_pb_pr;
@@ -1062,8 +1062,8 @@ bool _s5p_tv_if_stop(void)
 {
 	struct s5p_tv_status *st = &s5ptv_status;
 
-	bool t_corr_en	= st->hdmi_tg_cmd.timing_correction_en;
-	bool sync_en	= st->hdmi_tg_cmd.bt656_sync_en;
+	bool t_corr_en 	 = st->hdmi_tg_cmd.timing_correction_en;
+	bool sync_en 	 = st->hdmi_tg_cmd.bt656_sync_en;
 	enum s5p_tv_o_mode out_mode = st->tvout_param.out_mode;
 
 	TVOUTIFPRINTK("tvout sub sys. stopped!!\n");
@@ -1244,17 +1244,17 @@ bool _s5p_tv_if_set_disp(void)
 		return false;
 		break;
 	}
-#if defined(CONFIG_CPU_S5PV210) && defined(CONFIG_PM)
+#if defined(CONFIG_CPU_S5PV210) && defined(CONFIG_PM )
 	if ((st->hpd_status) && st->suspend_status == false) {
 #endif
-		_s5p_tv_if_start();
-#if defined(CONFIG_CPU_S5PV210) && defined(CONFIG_PM)
-    	}
+	_s5p_tv_if_start();
+#if defined(CONFIG_CPU_S5PV210) && defined(CONFIG_PM )
+    }
 	/* If the cable is not inserted or system is on suspend mode
 	Just set variable, _s5p_tv_if_start() function will be called
 	in resume or handle_cable function according to this variable*/
-	else
-		st->tvout_output_enable = true;
+    else
+        st->tvout_output_enable = true;
 #endif
 	return true;
 }
