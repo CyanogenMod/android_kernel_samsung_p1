@@ -1,7 +1,7 @@
 /* linux/drivers/media/video/samsung/tv20/s5pv210/tv_clock_s5pc110.c
  *
  * Copyright (c) 2010 Samsung Electronics
- * http://www.samsung.com/
+ * 	http://www.samsung.com/
  *
  * clock raw ftn  file for Samsung TVOut driver
  *
@@ -53,7 +53,7 @@ void __s5p_tv_clk_init_hpll(unsigned int lock_time,
 
 	temp = 0;
 
-	if (vsel)
+	if(vsel)
 		temp |= VCO_FREQ_SEL;
 
 	temp |= VPLL_ENABLE;
@@ -62,7 +62,7 @@ void __s5p_tv_clk_init_hpll(unsigned int lock_time,
 	writel(VPLL_LOCKTIME(lock_time), S5P_VPLL_LOCK);
 	writel(temp, S5P_VPLL_CON);
 
-	while (!VPLL_LOCKED(readl(S5P_VPLL_CON)));
+	while(!VPLL_LOCKED(readl(S5P_VPLL_CON)));
 
 	TVCLKPRINTK("0x%08x,0x%08x\n\r", readl(S5P_VPLL_LOCK), \
 			readl(S5P_VPLL_CON));
@@ -95,7 +95,7 @@ s5p_tv_clk_err __s5p_tv_clk_init_mout_hpll(s5p_tv_clk_mout_hpll mout_hpll)
 {
 	TVCLKPRINTK("(%d)\n\r", mout_hpll);
 
-	writel(readl(S5P_CLK_SRC1) | HDMI_SEL_HDMIPHY, S5P_CLK_SRC1);
+	writel(readl(S5P_CLK_SRC1)| HDMI_SEL_HDMIPHY, S5P_CLK_SRC1);
 
 	TVCLKPRINTK("S5P_CLK_SRC1 :0x%08x\n", readl(S5P_CLK_SRC1));
 	return S5P_TV_CLK_ERR_NO_ERROR;
@@ -140,7 +140,7 @@ void __s5p_tv_clk_init_hdmi_ratio(unsigned int clk_div)
 /*
  * hclk gating
  */
- 
+
 /* VP */
 void __s5p_tv_clk_set_vp_clk_onoff(bool clk_on)
 {
@@ -148,9 +148,9 @@ void __s5p_tv_clk_set_vp_clk_onoff(bool clk_on)
        TVCLKPRINTK("VP hclk : %s\n\r", clk_on ? "on":"off");
 
        if (clk_on)
- 		bit_add_l(S5P_CLKGATE_IP1_VP, S5P_CLKGATE_IP1);
+       bit_add_l(S5P_CLKGATE_IP1_VP, S5P_CLKGATE_IP1);
        else
-		bit_del_l(S5P_CLKGATE_IP1_VP, S5P_CLKGATE_IP1);
+       bit_del_l(S5P_CLKGATE_IP1_VP, S5P_CLKGATE_IP1);
 
        TVCLKPRINTK("S5P_CLKGATE_MAIN1 :0x%08x\n\r", readl(S5P_CLKGATE_MAIN1));
      */
@@ -163,9 +163,9 @@ void __s5p_tv_clk_set_vmixer_hclk_onoff(bool clk_on)
        TVCLKPRINTK("MIXER hclk : %s\n\r", clk_on ? "on":"off");
 
        if (clk_on)
-		bit_add_l(S5P_CLKGATE_IP1_MIXER, S5P_CLKGATE_IP1);
+       bit_add_l(S5P_CLKGATE_IP1_MIXER, S5P_CLKGATE_IP1);
        else
-		bit_del_l(S5P_CLKGATE_IP1_MIXER, S5P_CLKGATE_IP1);
+       bit_del_l(S5P_CLKGATE_IP1_MIXER, S5P_CLKGATE_IP1);
 
        TVCLKPRINTK("S5P_CLKGATE_MAIN1 :0x%08x\n\r", readl(S5P_CLKGATE_MAIN1));
      */
@@ -191,20 +191,20 @@ void __s5p_tv_clk_set_hdmi_hclk_onoff(bool clk_on)
        TVCLKPRINTK("HDMI hclk : %s\n\r", clk_on ? "on":"off");
 
        if (clk_on) {
-		bit_add_l(S5P_CLKGATE_IP1_HDMI, S5P_CLKGATE_IP1);
-		bit_add_l(VMIXER_OUT_SEL_HDMI, S5P_MIXER_OUT_SEL);
+       bit_add_l(S5P_CLKGATE_IP1_HDMI, S5P_CLKGATE_IP1);
+       bit_add_l(VMIXER_OUT_SEL_HDMI, S5P_MIXER_OUT_SEL);
        } else
-		bit_del_l(S5P_CLKGATE_IP1_HDMI, S5P_CLKGATE_IP1);
+       bit_del_l(S5P_CLKGATE_IP1_HDMI, S5P_CLKGATE_IP1) ;
 
        TVCLKPRINTK("S5P_CLKGATE_PERI1 :0x%08x\n\r", readl(S5P_CLKGATE_PERI1));
        TVCLKPRINTK("clk output is %s\n\r", readl(S5P_MIXER_OUT_SEL) ? "HDMI":"SDOUT");
      */
 }
 
-/* 
- * sclk gating 
+/*
+ * sclk gating
  */
- 
+
 /* MIXER */
 void __s5p_tv_clk_set_vmixer_sclk_onoff(bool clk_on)
 {
