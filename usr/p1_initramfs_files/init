@@ -60,4 +60,6 @@ busybox umount /proc
 busybox date >>boot.txt
 busybox rm -fr /stage1 /dev/*
 export PATH="${_PATH}"
+HW=$(cat /proc/cpuinfo | grep Hardware | busybox sed s/Hardware// | busybox tr '[A-Z]' '[a-z]' | busybox tr -d ' ' | busybox tr -d ':')
+mv /init.p1.rc /init.$HW.rc
 exec /init
